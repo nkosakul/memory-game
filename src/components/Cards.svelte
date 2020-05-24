@@ -4,7 +4,6 @@
 
   const dispatch = createEventDispatcher();
   export let cardLimit;
-  console.log(cardLimit);
   let photos = [];
   let activeCards = [];
 
