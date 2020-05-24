@@ -1,4 +1,4 @@
-# Memory Games
+# Memory Game
 
 A little memory game, just to play around with Svelte.
 (No support for IE11)
