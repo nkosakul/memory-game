@@ -3,7 +3,7 @@
   import Head from './components/Head.svelte';
   import Cards from './components/Cards.svelte';
 
-  let finishedCards = [];
+  let finishedCards = 0;
   let cardLimit = 12;
 
   const handleCard = event =>
