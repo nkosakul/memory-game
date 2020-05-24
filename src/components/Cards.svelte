@@ -1,11 +1,24 @@
 <script>
   import { onMount, createEventDispatcher } from 'svelte';
   import { fly } from 'svelte/transition';
+  import { resets } from '../stores/store.js';
 
   const dispatch = createEventDispatcher();
   export let cardLimit;
   let photos = [];
   let activeCards = [];
+
+  $: if ($resets > 0) resetCards($resets);
+
+  const resetCards = () => {
+    const cards = [...document.querySelectorAll('.card')];
+    activeCards = [];
+    cards.forEach(card => card.classList.remove('is-active', 'is-finished'));
+
+    setTimeout(() => {
+      photos = photos.sort(() => Math.random() - 0.5); // re-shuffle the cards
+    }, 800); // wait for flip animation to end
+  };
 
   const handleClick = (e, photo) => {
     const button = e.currentTarget;
@@ -17,6 +30,7 @@
     button.classList.add('is-active');
     activeCards.push(photo.id);
 
+    // start checking if a second card is selected
     if (activeCards.length === 2) {
       const isEqual = activeCards.every(id => id === activeCards[0]);
       const cards = [...document.querySelectorAll(`.card-${photo.id}`)];
@@ -57,7 +71,6 @@
       `https://picsum.photos/v2/list?page=2&limit=${cardLimit}`
     );
     let response = await res.json();
-    console.log(response);
     let arr = await response.concat(response); // duplicate the items
     photos = arr.sort(() => Math.random() - 0.5); // shuffle the array
   });

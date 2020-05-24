@@ -1,5 +1,4 @@
 <script>
-  import { onMount } from 'svelte';
   import Head from './components/Head.svelte';
   import Cards from './components/Cards.svelte';
   import Intro from './components/Intro.svelte';
@@ -13,13 +12,16 @@
     gameStarted = true;
   };
 
-  const handleCard = event =>
-    (finishedCards = [...finishedCards, event.detail.photo]);
+  const handleReset = () => {
+    finishedCards = 0;
+  };
+
+  const handleCard = event => finishedCards++;
 </script>
 
 <div class="container">
   {#if gameStarted}
-    <Head {finishedCards} {cardLimit} />
+    <Head on:reset={handleReset} {finishedCards} {cardLimit} />
     <Cards on:addCard={handleCard} {cardLimit} />
   {:else}
     <Intro on:submit={handleSubmit} />
