@@ -27,6 +27,12 @@
     <Intro on:submit={handleSubmit} />
   {/if}
 </div>
+<footer>
+  <p>
+    <small>by nkosakul</small>
+  </p>
+  <a href="https://github.com/nkosakul/memory-game">Github</a>
+</footer>
 
 <style type="text/scss">
   .container {
@@ -34,5 +40,15 @@
     width: 100%;
     margin: 0 auto;
     padding: 10px;
+  }
+
+  footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+
+    p {
+      margin: 0;
+    }
   }
 </style>
